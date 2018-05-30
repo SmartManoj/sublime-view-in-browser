@@ -1,6 +1,7 @@
 #
 # History:
-#
+#		05/30/2018:
+#			- Finished in %.1fs string removal
 # 		03/11/2016:
 # 			- Fix issue where parenthesis in paths would cause a failure to load. Solves #52
 #
@@ -254,6 +255,7 @@ class ViewInBrowserCommand(sublime_plugin.TextCommand):
 		#
 		region = sublime.Region(0, view.size())
 		text = view.substr(region)
+		text = re.sub(r'\[Finished in [\d.]+s\]$','',text)
 
 		tempFile.write(text.encode("utf-8"))
 		tempFile.close()
